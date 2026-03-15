@@ -1,0 +1,127 @@
+## Overview
+
+C provides increment (`++`) and decrement (`--`) operators.
+They can appear in two forms:
+- **Post-increment / Post-decrement**
+- **Pre-increment / Pre-decrement**
+The difference is **when the variable is updated**.
+
+---
+
+# Post-Increment and Post-Decrement
+Post operators update the variable **after the expression is evaluated**.
+
+## Example
+
+```c
+#include <stdio.h>
+
+int main() {
+    int x = 10;
+    int y = 20;
+    int z = 30;
+
+    int w = (x++) + (y--) + (z++);
+
+    printf("%d %d %d %d\n", x, y, z, w);
+
+    return 0;
+}
+```
+
+### Explanation
+
+Step-by-step evaluation:
+
+```
+x++  -> use 10, then x becomes 11
+y--  -> use 20, then y becomes 19
+z++  -> use 30, then z becomes 31
+```
+
+So:
+
+```
+w = 10 + 20 + 30 = 60
+```
+
+Final values:
+
+```
+x = 11
+y = 19
+z = 31
+w = 60
+```
+
+---
+
+# Pre-Increment and Pre-Decrement
+
+Pre operators update the variable **before the expression is evaluated**.
+
+## Example
+
+```c
+#include <stdio.h>
+
+int main() {
+    int x = 10;
+    int y = 20;
+    int z = 30;
+
+    int w = (++x) + (--y) + (++z);
+
+    printf("%d %d %d %d\n", x, y, z, w);
+
+    return 0;
+}
+```
+
+### Explanation
+
+Step-by-step evaluation:
+
+```
+++x -> x becomes 11, use 11
+--y -> y becomes 19, use 19
+++z -> z becomes 31, use 31
+```
+
+So:
+
+```
+w = 11 + 19 + 31 = 61
+```
+
+Final values:
+
+```
+x = 11
+y = 19
+z = 31
+w = 61
+```
+
+---
+
+# Key Difference
+
+| Operator | Behavior |
+|--------|---------|
+| `x++` | use value first, then increment |
+| `++x` | increment first, then use value |
+| `x--` | use value first, then decrement |
+| `--x` | decrement first, then use value |
+
+---
+
+# Important Note
+
+Expressions like this should be avoided:
+
+```c
+x = x++ + ++x;
+```
+
+This causes **undefined behavior** in C and may produce different results depending on the compiler.
